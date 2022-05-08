@@ -24,7 +24,7 @@ background: linear-gradient(to bottom, #4A00E0, #8E2DE2); /* W3C, IE 10+/ Edge, 
   .imagen img{
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     position:relative;
   }
   .informacion {
