@@ -4,13 +4,14 @@
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
 }
-
+/* estilos de la pagian general*/
 body {
 width: 100%;
 height: 100%;
-  display: flex;
-  background: #060AB2;
+display: flex;
+background: #0f2edb;
 }
+/* cuadricula del menu y tablero*/
 .container {
   display: grid;
   grid-template-columns: 1fr 1fr; 
@@ -19,32 +20,38 @@ height: 100%;
   grid-template-areas: 
     "menu tablero"; 
 }
+/* areas de la cuadricula */
 .menu { grid-area: menu; }
 .tablero { grid-area: tablero; }
 
-h1{ 
-  margin: 10px;
-  font-size: 32px;
+h1{
+  text-shadow:4px 4px 5px black;
+  margin: 20px;
+  font-size: 38px;
   color: #FFF;
+/* estilos de los creadores */
 }
 h2{
-  margin: 10px;
-  font-size: 24px;
+  margin: 20px;
+  font-size: 28px;
   color: #FFF;
+  text-shadow:3px 3px 4px rgb(0, 0, 0);
 }
+/* estilos del menu (boton de restart, titulo y nombres)*/
 .menu {
   margin-top: 10%;
   padding: 10px;
 }
+/* estilos del tablero */
 .tablero {
   margin-top: 10%;
-  width: 700px;
-  height: 800px;
+  width: 680px;
+  height: 850px;
   display: flex;
   flex-wrap: wrap;
   perspective: 1000px;
 }
-
+/* estilos de la carta */
 .carta {
   width: calc(20% - 10px);
   height: calc(25% - 10px);
@@ -53,64 +60,67 @@ h2{
   transform: scale(1);
   transform-style: preserve-3d;
   transition: transform .5s;
-  box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
-
+/* animacion de la carta cuando se voltea*/
 .carta:active {
   transform: scale(0.97);
   transition: transform .2s;
 }
-
+/* animacion de cuando se da click*/
 .carta.flip {
   transform: rotateY(180deg);
 }
-
+/* estilos de la imagen que sale en cada carta */
 .front-face,
 .back-face {
   width: 100%;
   height: 100%;
-  padding: 9px;
+  padding: 5px;
   position: absolute;
   border-radius: 5px;
-  background: #1C7CCC;
+  background: #00c6f8;
   backface-visibility: hidden;
 }
-
+/* animacion caundo se voltea cuando hay error*/
 .front-face {
   transform: rotateY(180deg);
 }
-button#reset {
+/* estilos del boton de reset */
+button#resetear {
     padding: 10px 40px;
     margin: 70px 10px 10px 10px;
-    border-radius: 3px;
-    font-size: 20px;
-    color: #FFF;
+    border-radius: 5px;
+    font-size: 24px;
+    color: rgb(0, 26, 255);
     text-decoration: none;
-    background-color: #2ecc71;
+    background-color: #FFFF00;
     border: none;
-    border-bottom: 5px solid #27ae60;
-    text-shadow: 0px -2px #27ae60;
+    border-bottom: 5px solid #ffe600;
+    text-shadow: 0px -2px #0004ff;
     -webkit-transition: all 0.1s;
     transition: all 0.1s;
     text-align: center;
     flex-wrap: wrap;
    }
+   /* animacion del boton */
    button:hover, button:active {
     -webkit-transform: translate(0px,5px);
     -ms-transform: translate(0px,5px);
     transform: translate(0px,5px);
     border-bottom: 1px solid #2ecc71;
    }
-.youAreAWinner {
+   /* estilos del anuncio cuando ganaste */
+.victoria {
   text-align: center;
   width: 100%;
   color: yellow;
-  font-family: sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 90px;
   font-weight: bold;
   position: absolute;
   transform: translate(-50%, -50%);
   top: 50%;
   left: 50%;
-  text-shadow: 10px 2px black
+  text-shadow: 10px 4px black
 }

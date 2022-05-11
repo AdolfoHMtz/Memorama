@@ -1,85 +1,87 @@
+// creado por Adolfo Huerta y Viridiana Torres
+// variable de la portida
 var partida = {
   init: function () {
     partida.array = Array.from(document.querySelectorAll(".tablero .carta"));
     partida.array.forEach(function (element) {
-      element.addEventListener("click", partida.turningOver);
+    element.addEventListener("click", partida.voltearCarta);
     });
-    //it will count the number of card that was turn over
-    partida.number = 0;
-    partida.previousCard = 0;
-    partida.isbusy = 0;
-    partida.shuffleItems();
-    //reset button
-    partida.resetBtn = document
-      .querySelector("#reset")
+    //objetos de la partida
+    partida.numeroCartaVolteada = 0;
+    partida.primeraCartaVolteada = 0;
+    partida.segundaCartaVolteada = 0;
+    partida.mezclarCartas();
+    //boton de reseteo
+    partida.resetearPartida = document
+      .querySelector("#resetear")
       .addEventListener("click", function () {
-        partida.number = 0;
-        partida.previousCard = 0;
-        partida.isbusy = 0;
+        partida.numeroCartaVolteada = 0;
+        partida.primeraCartaVolteada = 0;
+        partida.segundaCartaVolteada = 0;
         partida.array.forEach(function (element) {
           element.classList.remove("flip");
         });
-        partida.shuffleItems();
+        partida.mezclarCartas();
         partida.div.remove();
       });
   },
-  shuffleItems: function () {
+  // se mezclan las cartas
+  mezclarCartas: function () {
     partida.array = partida.array
-      .map(function (e) {
-        e.parentNode.removeChild(e);
-        return e;
+      .map(function (a) {
+        a.parentNode.removeChild(a);          //parentNode es el padre del nodo en si es una carta // a solo es un
+        return a;
       })
       .sort(function () {
         return 0.5 - Math.random();
       })
-      .map(function (e) {
-        document.querySelector(".tablero").appendChild(e);
-        return e;
+      .map(function (a) {
+        document.querySelector(".tablero").appendChild(a);
+        return a;
       });
   },
-  compareElements: function (event) {
+  // se comparan las cartas por su atributo que se asigno en html
+  compararCartas: function (event) {
     if (
       event.target.parentNode.getAttribute("data-framework") ==
-      partida.previousCard.getAttribute("data-framework")
+      partida.primeraCartaVolteada.getAttribute("data-framework")
     ) {
-      // console.log('daaaa');
     } else {
       event.target.parentNode.classList.remove("flip");
-      partida.previousCard.classList.remove("flip");
+      partida.primeraCartaVolteada.classList.remove("flip");
     }
   },
-  turningOver: function (event) {
-    if (partida.isbusy) {
+  //funcion de c¿voltear cartas
+  voltearCarta: function (event) {
+    if (partida.segundaCartaVolteada) {
       return;
     }
     event.target.parentNode.classList.add("flip");
-    if (partida.number < 1) {
-      partida.number++;
+    if (partida.numeroCartaVolteada < 1) {
+      partida.numeroCartaVolteada++;
     } else {
-      setTimeout(partida.compareElements, 800, event);
-      partida.number = 0;
-      partida.isbusy = 1;
+      setTimeout(partida.compararCartas, 800, event);
+      partida.numeroCartaVolteada = 0;
+      partida.segundaCartaVolteada = 1;
     }
     setTimeout(
       function (event) {
-        partida.previousCard = event.target.parentNode;
-        partida.isbusy = 0;
+        partida.primeraCartaVolteada = event.target.parentNode;
+        partida.segundaCartaVolteada = 0;
       },
       800,
       event
     );
-    //if we have all cards flip
+    //Si se encontraron todos los pares
     if (document.querySelectorAll(".carta.flip").length == 20) {
       setTimeout(function () {
-        // alert('You are a winner!');
+        //anuncio de que ganaste
         partida.div = document.createElement("div");
-        partida.div.innerHTML = "Ganaste";
-        partida.div.classList.add("youAreAWinner");
+        partida.div.innerHTML = "¡¡Ganaste!!";
+        partida.div.classList.add("victoria");
         document.querySelector(".tablero").appendChild(partida.div);
       }, 800);
     }
   },
 };
-window.onload = function () {
   partida.init();
-};
