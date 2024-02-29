@@ -9,16 +9,13 @@
     <title>Memorama</title>
   </head>
   <body>
+    <header class="header">
+      <h1>¿Qué es un FPGA?</h1>
+    </header>
+  <button id="resetear">RESTART</button>
+
     <!-- contenedor general-->
-    <main class="container">
-    <!-- contenedor del menu-->
-    <section class="menu" >
-        <h1>Memorama</h1>
-        <br>
-        <h2>&copy; Viridiana Torres & Adolfo Huerta</h2>
-      <button id="resetear">RESTART</button>
-      <div id="result"></div>
-    </section>
+    <div class="container">
     <!-- contenedor del tablero-->
     <section class="tablero">
     <!-- contenedor de cada carta-->
@@ -122,7 +119,11 @@
         <img class="back-face" src="./img/back-card.png" alt="Memory Card" />
       </div>
     </section>
-  </main>
+    
+  </div>
+  <footer class="footer">
+    <p>&copy; GALCEX</p>
+  </footer>
     <script src="main.js"></script>
   </body>
 </html>
